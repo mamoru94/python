@@ -1,0 +1,4 @@
+#самое длинное слово
+txt = input()
+sp_txt = txt.split()
+print(max(sp_txt))
