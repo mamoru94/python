@@ -1,4 +1,7 @@
 #самое длинное слово
-txt = input()
+txt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
 sp_txt = txt.split()
-print(max(sp_txt))
+summ = len(txt)
+for i in sp_txt:
+    if summ//len(i)==len(i):
+          print(i)
