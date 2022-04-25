@@ -1,7 +1,4 @@
 #самое длинное слово
+#txt = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam"
 txt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
-sp_txt = txt.split()
-summ = len(txt)
-for i in sp_txt:
-    if summ//len(i)==len(i):
-          print(i)
+print(max(txt.split(), key=len))
