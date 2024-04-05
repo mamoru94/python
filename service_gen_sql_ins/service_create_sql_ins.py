@@ -27,7 +27,7 @@ def generate_sql_query(db_name, table, columns, template_type):
         sql_query += f"    load_dttm,\n"
         sql_query += f"    load_ts_dttm,\n"
         sql_query += f"    op_cd,\n"
-        sql_query += f"    'ods_plus.bpm_2lis_12_vcitm_erp__dds.fct_batch_erp' AS dataflow_id,\n"
+        sql_query += f"    'ods_plus.<>.<>' AS dataflow_id,\n"
     elif template_type == 'dm':
         sql_query = f"SELECT\n"
         sql_query += f"    load_id,\n"
