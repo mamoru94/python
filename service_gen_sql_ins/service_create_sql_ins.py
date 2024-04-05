@@ -7,19 +7,39 @@ SAVE_PATH = r"C:\Users\a.aleksandrov.CORP\Desktop\NLMK scripts\services\service_
 def generate_sql_template(schema, table, column, data_type):
     return f"{column}"
 
-def generate_sql_query(db_name, table, columns):
-    sql_query = f"SELECT\n"
-    sql_query += f"    load_id,\n"
-    sql_query += f"    load_dttm,\n"
-    sql_query += f"    extraction_query_id,\n"
-    sql_query += f"    cast('I' as char(1)) as op_cd,\n"
-    sql_query += f"    to_timestamp(load_ts, 'yyyyMMddHHmmss') AS LOAD_TS_DTTM,\n"
+def generate_sql_query(db_name, table, columns, template_type):
+    if template_type == 'ods+':
+        sql_query = f"SELECT\n"
+        sql_query += f"    load_id,\n"
+        sql_query += f"    load_dttm,\n"
+        sql_query += f"    extraction_query_id,\n"
+        sql_query += f"    cast('I' as char(1)) as op_cd,\n"
+        sql_query += f"    to_timestamp(load_ts, 'yyyyMMddHHmmss') AS LOAD_TS_DTTM,\n"
+    elif template_type == 'dim':
+        sql_query = f"SELECT\n"
+        sql_query += f"    load_id,\n"
+        sql_query += f"    load_dttm,\n"
+        sql_query += f"    load_ts_dttm,\n"
+        sql_query += f"    op_cd,\n"
+    elif template_type == 'fct':
+        sql_query = f"SELECT\n"
+        sql_query += f"    load_id,\n"
+        sql_query += f"    load_dttm,\n"
+        sql_query += f"    load_ts_dttm,\n"
+        sql_query += f"    op_cd,\n"
+        sql_query += f"    'ods_plus.bpm_2lis_12_vcitm_erp__dds.fct_batch_erp' AS dataflow_id,\n"
+    elif template_type == 'dm':
+        sql_query = f"SELECT\n"
+        sql_query += f"    load_id,\n"
+        sql_query += f"    deleted_flg,\n"
+    else:
+        raise ValueError("Unknown template type")
 
     for column, data_type in columns.items():
         sql_query += f"    {generate_sql_template(db_name, table, column, data_type)},\n"
 
     sql_query = sql_query.rstrip(",\n") + "\n"
-    sql_query += f"FROM ""{p_src_tab_name" "};\n"
+    sql_query += f"FROM "+"{"+"p_src_tab_name"+  "}"+";\n"
     return sql_query
 
 def main():
@@ -33,6 +53,8 @@ def main():
         next(reader)  # Пропускаем заголовок
         current_table = None
         current_columns = {}
+        
+        template_type = input("Выберите тип шаблона для всех таблиц ('ods+', 'dim', 'fct' или 'dm'): ")
 
         for row in reader:
             _, table_name, column, data_type, *_ = row
@@ -40,7 +62,7 @@ def main():
             if table_name != current_table:  # Новая таблица
                 if current_table is not None:  # Если это не первая таблица
                     # Генерируем SQL для предыдущей таблицы и сохраняем в файл
-                    sql_query = generate_sql_query(None, current_table, current_columns)
+                    sql_query = generate_sql_query(None, current_table, current_columns, template_type)
                     with open(os.path.join(SAVE_PATH, f"{current_table}.sql"), "w", encoding='utf-8') as sql_file:
                         sql_file.write(sql_query)
 
@@ -51,7 +73,7 @@ def main():
 
         # Генерируем SQL для последней таблицы и сохраняем в файл
         if current_table is not None:
-            sql_query = generate_sql_query(None, current_table, current_columns)
+            sql_query = generate_sql_query(None, current_table, current_columns, template_type)
             with open(os.path.join(SAVE_PATH, f"{current_table}.sql"), "w", encoding='utf-8') as sql_file:
                 sql_file.write(sql_query)
 
