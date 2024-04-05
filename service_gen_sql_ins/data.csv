@@ -1,0 +1,33 @@
+﻿SCHEMA;TABLE;COLUMN;TYPE;COMMENT;COMMENT COLUMN
+{db_name};fct_sales_deliver_itm_fact_erp;ownership_transfer_date;date;поставка данные позиции;Дата перехода права собственности
+{db_name};fct_sales_deliver_itm_fact_erp;factory_shipment_date;date;поставка данные позиции;Дата отгрузки с комбината
+{db_name};fct_sales_deliver_itm_fact_erp;position_code;varchar(255);поставка данные позиции;номер позиции
+{db_name};fct_sales_deliver_itm_fact_erp;delivery_code;varchar;поставка данные позиции;номер поставки
+{db_name};fct_sales_deliver_itm_fact_erp;stock_code;varchar;поставка данные позиции;Код склада
+{db_name};fct_sales_deliver_itm_fact_erp;order_item_code;varchar(255);поставка данные позиции;Позиция заказа
+{db_name};fct_sales_deliver_itm_fact_erp;order_code;varchar;поставка данные позиции;заказ
+{db_name};fct_sales_doc_fact_erp;order_item_code;varchar(255);торговый документ;позиция заказа
+{db_name};fct_sales_doc_fact_erp;order_code;varchar;торговый документ;номер заказа
+{db_name};fct_sales_doc_fact_erp;shipment_code;varchar;торговый документ;Вид отгрузки
+{db_name};fct_sales_inv_itm_fact_erp;position_code;varchar(255);фактура позиция;Позиция
+{db_name};fct_sales_inv_itm_fact_erp;document_posting_date;date;фактура позиция;Дата проводки в документе
+{db_name};fct_sales_inv_itm_fact_erp;actual_delivered_quantity;decimal(31, 2) ;фактура позиция;Фактически поставленное количество (ПЕ)
+{db_name};fct_sales_inv_itm_fact_erp;doc_currency_net_value;decimal(31, 2)   ;фактура позиция;стоимость нетто в валюте документа
+{db_name};fct_sales_inv_itm_fact_erp;exchange_rate;decimal(31, 0);фактура позиция;валютный курс
+{db_name};fct_sales_inv_itm_fact_erp;revenue_account_code;varchar;фактура позиция;Счёт выручки
+{db_name};fct_sales_inv_itm_fact_erp;basic_unit;varchar;фактура позиция;Базисная ЕИ
+{db_name};fct_sales_inv_itm_fact_erp;sales_unit;varchar;фактура позиция;Продажная ЕИ
+{db_name};fct_sales_inv_itm_fact_erp;material_code;varchar;фактура позиция;Код материала
+{db_name};fct_sales_inv_itm_fact_erp;delivery_item_code;varchar(255);фактура позиция;Позиция поставки
+{db_name};fct_sales_inv_itm_fact_erp;sample_document_code;varchar;фактура позиция;Номер документа образца
+{db_name};fct_sales_inv_itm_fact_erp;destin_country_region_code;varchar;фактура позиция;Регион страны назначения
+{db_name};fct_sales_inv_itm_fact_erp;stock_code;varchar;фактура позиция;Склад
+{db_name};fct_sales_inv_itm_fact_erp;sales_channel_code;varchar;фактура позиция;канал сбыта код
+{db_name};fct_sales_inv_itm_fact_erp;doc_currency_estimated_value;decimal(31, 2);фактура позиция;расчетная стоимость в валюте документа
+{db_name};fct_sales_inv_itm_fact_erp;material_group_code;varchar;фактура позиция;Код группы материалов
+{db_name};fct_sales_inv_itm_fact_erp;currency_code;string;фактура позиция;Валюта код
+{db_name};fct_sales_inv_itm_fact_erp;sales_organization_code;varchar;фактура позиция;Сбытовая организация
+{db_name};fct_sales_inv_itm_fact_erp;assessment_type_text;varchar;фактура позиция;Вид оценки
+{db_name};fct_sales_inv_itm_fact_erp;sector_code;varchar;фактура позиция;Сектор
+{db_name};fct_sales_inv_itm_fact_erp;inv_code;varchar;фактура позиция;Фактура
+{db_name};fct_sales_inv_itm_fact_erp;company_code;varchar;фактура позиция;Балансовая единица
